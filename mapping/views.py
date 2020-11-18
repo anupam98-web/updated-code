@@ -241,7 +241,19 @@ def fieldmatching(request):
                                     print(a)
         print(df)
         for index, row in df.iterrows():
-            if row['current_status_desc'] == 'F2F int 1 Reject':
+
+            if row['current_status'] == 104 or row['current_status'] == 4: # Telecon_Interview and tele_reject
+                if row['Int_Tele_Date']== '':
+                    row = df.loc[index]
+                    a = index
+                    bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
+                    print(bad_dictionary)
+                    dic[a] = bad_dictionary
+                    df = df.drop(index)
+                    print(a)
+                    
+            if row['current_status'] == 105 or row['current_status'] == 5: # f2f_interview and reject
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '':
                     row = df.loc[index]
                     a = index
@@ -254,71 +266,77 @@ def fieldmatching(request):
                     
                 print(df)
                 
-            if row['current_status_desc'] == 'F2F Int 2 Reject':
+            if row['current_status'] ==  106 or row['current_status'] ==  6: #'F2F Int 2 Reject' and reject
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '':
                     row = df.loc[index]
                     a = index
                     bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
                     dic[a] = bad_dictionary
                     df = df.drop(index)
                     print(a)
                     
                 print(df)
-            if row['current_status_desc'] == 'F2F int 3 Reject':
-                if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date'] == '':
-                    row = df.loc[index]
-                    a = index
-                    bad_dictionary = row.to_dict()
-                    dic[a] = bad_dictionary
-                    df = df.drop(index)
-                    print(a)
-                    
-                print(df)
-            if row['current_status_desc'] == 'Final Int Reject':
+            #if row['current_status'] == ''  #'F2F int 3 Reject'
+             #   if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date'] == '':
+              #      row = df.loc[index]
+               #     a = index
+                #    bad_dictionary = row.to_dict()
+                 #   bad_dictionary['reason'] = 'The dates are missing'
+                  #  dic[a] = bad_dictionary
+                   # df = df.drop(index)
+                    #print(a)
+
+            if row['current_status'] == 107 or row['current_status'] == 7: #'Final Int Reject' and reject
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date'] == '' or row['Int_Final_Date'] == '':
                     row = df.loc[index]
                     a = index
                     bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
                     dic[a] = bad_dictionary
                     df = df.drop(index)
                     print(a)
                     
                 print(df)
-            if row['current_status_desc'] == 'HR Reject':
+            if row['current_status'] == 108 or row['current_status'] == 8: #'HR Reject' and hr interview
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date']== '' or row['Int_Final_Date'] == '' or row['Int_HR_Date'] == '':
                     row = df.loc[index]
                     a = index
                     bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
                     dic[a] = bad_dictionary
                     df = df.drop(index)
                     print(a)
                     
                 print(df)
-            if row['current_status_desc'] == 'Offer Declined':
+            if row['current_status'] == 111 or row['current_status'] == 11: #'Offer Declined' and declined
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date'] == '' or row['Int_Final_Date'] == '' or row['Int_HR_Date'] == '' or row['offer_date']=='':
                     row = df.loc[index]
                     a = index
                     bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
                     dic[a] = bad_dictionary
                     df = df.drop(index)
                     print(a)
                     
                 print(df)
-            if row['current_status_desc'] == 'Candidate lost interest':
+            if row['current_status'] == 109 or row['current_status'] == 9: #'Candidate lost interest' and candidate awaited
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date'] == '' or row['Int_Final_Date'] == '' or row['Int_HR_Date'] == '' or row['offer_date']=='':
                     row = df.loc[index]
                     a = index
                     bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
                     dic[a] = bad_dictionary
                     df = df.drop(index)
                     
                     
                 print(df)
-            if row['current_status_desc'] == 'Did not Join':
+            if row['current_status'] == 114 or row['current_status'] == 14: #'Did not Join' and joined
                 if row['Int_Tele_Date']== '' or row['Int_p1_Date'] == '' or row['Int_p2_Date'] == '' or row['Int_p3_Date'] == '' or row['Int_Final_Date'] == '' or row['Int_HR_Date'] == '' or row['offer_date']=='' or row['joining_date'] == '':
                     row = df.loc[index]
                     a = index
                     bad_dictionary = row.to_dict()
+                    bad_dictionary['reason'] = 'The dates are missing'
                     dic[a] = bad_dictionary
                     df = df.drop(index)
                     print(a)
@@ -327,6 +345,7 @@ def fieldmatching(request):
             
 
         print(df)
+        # for saving the bad records
         for index, object in dic.items():
             m = BadRecords()
             for k, v in object.items():
@@ -361,6 +380,7 @@ def fieldmatching(request):
         print(df.dtypes)
         print(dic.keys())
         df = df.fillna('')
+
         
         dictionary = df.to_dict(orient="index")
         Mapping.objects.create(MappingFor='Staging', Mappings=dict)
