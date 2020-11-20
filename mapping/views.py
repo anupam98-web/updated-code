@@ -70,178 +70,177 @@ def fieldmatching(request):
         df = df.fillna('')
         print(df)
         dic={}
-            #bd_dict = {}
 
-
-                            
-            #if 'current_status_desc' in names and 'current_status' in names:
-                        #print(df)
-            #df[['current_status','current_status_desc']] = df[['current_status','current_status_desc']].fillna('')
+        # status validation start
         for index, row in df.iterrows():
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=1).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=1).StageID
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=1).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=1).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=2).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=2).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=2).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=2).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=3).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=3).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=3).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=3).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=4).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=4).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=4).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=4).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=5).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=5).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=5).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=5).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=6).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=6).StageID
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=6).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=6).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=7).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=7).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=7).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=7).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=8).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=8).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=8).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=8).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=9).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=9).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=9).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=9).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=10).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=10).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=10).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=10).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=11).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=11).StageID
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=11).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=11).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=12).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=12).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=12).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=12).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=13).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=13).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=13).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=13).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=14).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=14).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=14).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=14).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=15).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=15).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=15).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=15).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=16).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=16).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=16).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=16).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=17).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=17).StageID
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=17).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=17).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=18).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=18).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=18).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=18).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=19).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=19).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=19).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=19).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=20).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=20).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=20).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=20).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=21).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=21).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=21).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=21).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=22).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=22).StageID
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=22).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=22).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=23).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=23).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=23).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=23).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=24).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=24).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=24).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=24).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=25).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=25).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=25).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=25).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=26).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=26).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=26).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=26).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=27).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=27).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=27).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=27).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=28).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=28).StageID
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=28).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=28).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=29).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=29).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=29).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=29).StageName
-                                continue
-                            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=30).StageName:
-                                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=30).StageID 
-                            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=30).StageID and row['current_status_desc']== '':
-                                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=30).StageName
-                                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=1).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=1).StageID
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=1).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=1).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=2).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=2).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=2).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=2).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=3).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=3).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=3).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=3).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=4).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=4).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=4).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=4).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=5).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=5).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=5).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=5).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=6).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=6).StageID
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=6).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=6).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=7).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=7).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=7).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=7).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=8).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=8).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=8).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=8).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=9).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=9).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=9).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=9).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=10).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=10).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=10).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=10).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=11).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=11).StageID
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=11).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=11).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=12).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=12).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=12).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=12).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=13).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=13).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=13).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=13).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=14).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=14).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=14).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=14).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=15).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=15).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=15).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=15).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=16).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=16).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=16).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=16).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=17).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=17).StageID
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=17).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=17).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=18).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=18).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=18).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=18).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=19).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=19).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=19).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=19).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=20).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=20).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=20).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=20).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=21).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=21).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=21).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=21).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=22).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=22).StageID
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=22).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=22).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=23).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=23).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=23).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=23).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=24).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=24).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=24).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=24).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=25).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=25).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=25).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=25).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=26).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=26).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=26).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=26).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=27).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=27).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=27).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=27).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=28).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=28).StageID
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=28).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=28).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=29).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=29).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=29).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=29).StageName
+                continue
+            if row['current_status'] == '' and row['current_status_desc'] == CandidateStatus.objects.only('StageName').get(pk=30).StageName:
+                df.at[index,'current_status']= CandidateStatus.objects.only('StageID').get(pk=30).StageID 
+            elif row['current_status'] == CandidateStatus.objects.only('StageID').get(pk=30).StageID and row['current_status_desc']== '':
+                df.at[index,'current_status_desc']= CandidateStatus.objects.only('StageName').get(pk=30).StageName
+                continue
 
         print(df)
-        for index, row in df.iterrows():
-                            if row['reqt_date']== '' or row['date_cv_submitted']== '' or row['interview_date'] == '':       
-                                    row = df.loc[index]
-                                    a = index 
-                                    bad_dictionary = row.to_dict()
-                                    dic[a] = bad_dictionary
+        # status validationn ends
 
-                                    df = df.drop(index)
-                                    print(a)
+        # date validation start 
+        for index, row in df.iterrows():
+            if row['reqt_date']== '' or row['date_cv_submitted']== '' or row['interview_date'] == '':       
+                    row = df.loc[index]
+                    a = index 
+                    bad_dictionary = row.to_dict()
+                    dic[a] = bad_dictionary
+                    df = df.drop(index)
+                    print(a)
         print(df)
-        for index, row in df.iterrows():
+        # date validaiton ends
 
+        # status with date validation starts
+        for index, row in df.iterrows():
             if row['current_status'] == 104 or row['current_status'] == 4: # Telecon_Interview and tele_reject
                 if row['Int_Tele_Date']== '':
                     row = df.loc[index]
@@ -345,6 +344,8 @@ def fieldmatching(request):
             
 
         print(df)
+        # date with status validation ends
+
         # for saving the bad records
         for index, object in dic.items():
             m = BadRecords()
@@ -352,50 +353,70 @@ def fieldmatching(request):
                 setattr(m, k, v)
             setattr(m, 'id', index)
             m.save()
-            
+         
+        # converstion to date tiem format   
         df['reqt_date']= pd.to_datetime(df['reqt_date'])
         df['date_cv_submitted']= pd.to_datetime(df['date_cv_submitted'])
                       
         if 'wk_year' not in names:
-                        df['wk_year'] = df['date_cv_submitted'].dt.year
+            df['wk_year'] = df['date_cv_submitted'].dt.year
         if 'week_number' not in names:
-                        df['week_number'] = df['date_cv_submitted'].dt.week
+            df['week_number'] = df['date_cv_submitted'].dt.week
                     
                                                      
         df['interview_date']= pd.to_datetime(df['interview_date'])
-                        #df[['interview_date']] = df[['reqt_date']].fillna('')
+            #df[['interview_date']] = df[['reqt_date']].fillna('')
+
+        df['Int_Tele_Date']= pd.to_datetime(df['Int_Tele_Date'])
+        df['Int_p1_Date']= pd.to_datetime(df['Int_p1_Date'])
+        df['Int_p2_Date']= pd.to_datetime(df['Int_p2_Date'])
+        df['Int_p3_Date']= pd.to_datetime(df['Int_p3_Date'])
+        df['Int_Final_Date']= pd.to_datetime(df['Int_Final_Date'])
+        df['Int_HR_Date']= pd.to_datetime(df['Int_HR_Date'])
+        df['offer_date']= pd.to_datetime(df['offer_date'])
+        df['joining_date']= pd.to_datetime(df['joining_date'])
+        
 
         if 'DOB' in list(df.columns):
-
-                            #df['DOB'].replace({'None': ''}, inplace=True)                                       
-                            df['DOB']= pd.to_datetime(df['DOB'])
-                            #df[['DOB']] = df[['reqt_date']].fillna('')
-                            if 'month_of_birth' not in list(df.columns):
-                                df['month_of_birth'] = df['DOB'].dt.month
-                            if 'year_of_birth'  not in list(df.columns):
-                                df['year_of_birth'] = df['DOB'].dt.year
-                            #df.fillna('')
+            #df['DOB'].replace({'None': ''}, inplace=True)                                       
+            df['DOB']= pd.to_datetime(df['DOB'])
+            #df[['DOB']] = df[['reqt_date']].fillna('')
+            if 'month_of_birth' not in list(df.columns):
+                df['month_of_birth'] = df['DOB'].dt.month
+            if 'year_of_birth'  not in list(df.columns):
+                df['year_of_birth'] = df['DOB'].dt.year
+            #df.fillna('')
                                     
         print(df)
         print(df.dtypes)
         print(dic.keys())
-        df = df.fillna('')
-
+        #df['Int_p1_Date'].fillna('1998-11-28', inplace = True)
+        #df = df.transform(lambda x: x.fillna('TNone') if x.dtype == 'datetime' else pass)
+        #Null = None
+        #print(Null)
         
+        df = df.replace({pd.NaT: None}) # allow null values
+        print(df)
+
+        # whole validation ends
+
         dictionary = df.to_dict(orient="index")
+        #dictionary[0]['Int_p1_Date'] = None
+        print(dictionary.keys())
+        
         Mapping.objects.create(MappingFor='Staging', Mappings=dict)
         #print(Mapping.objects.all()[0].Mappings)
         save_dict(dictionary)
         return render(request, 'import_data.html')
     
     else:
-            path_name = request.GET.get('df')
-            df = pd.read_csv(path_name)
-            names = list(df.columns)
-            fields = [field.name for field in Staging._meta.get_fields()]
+        path_name = request.GET.get('df')
+        df = pd.read_csv(path_name)
+        names = list(df.columns)
+        fields = [field.name for field in Staging._meta.get_fields()]
 
-            return render(request, 'fieldmatching.html',
-                      {'fields': fields, 'path_name': path_name, 'names': names})
+        return render(request, 'fieldmatching.html',
+                    {'fields': fields, 'path_name': path_name, 'names': names})
 
 
 def save_dict(dictionary):
