@@ -65,3 +65,32 @@ def register(request):
 
 def upload(request):
     return redirect('/choose')
+
+def mandate_upload(request):
+    return redirect('/mandate_choose')
+
+
+def badrecords_dash(request):
+    return(request,'badrecords_dash.html')
+
+
+def manageteam_dash(request):
+    return(request,'manageteam_dash.html')
+
+
+
+def upload_mandate(request):
+    return redirect('/mandate_choose')
+
+
+def display_mandate(request):
+    return(request,'display_mandate.html')
+
+def upload_candidate(request):
+    return(request,'upload_candidate.html')
+
+
+def display_candidate(request):
+    return(request,'display_candidate.html')
+
+
