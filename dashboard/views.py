@@ -66,7 +66,7 @@ def register(request):
 def upload(request):
     return redirect('/choose')
 
-def mandate_upload(request):
+def mandate_upload(request): # your edit
     return redirect('/mandate_choose')
 
 
