@@ -1,6 +1,7 @@
 from django.db import models, migrations
 from django_pandas.managers import DataFrameManager
 from django.contrib.postgres.fields import HStoreField
+#from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Client(models.Model):
@@ -36,7 +37,7 @@ class Staging(models.Model):
     notice_period = models.FloatField(null = True)
     Int_Tele_Date = models.DateField(blank = True, null = True)
     Int_Tele_Result = models.TextField(blank = True, null = True)
-    Int_p1_Date = models.DateField(blank = True, null = True)
+    Int_p1_Date = models.DateField(blank = True, null = True, default = '')
     Int_p1_Result = models.TextField(blank = True, null = True)
     Int_p2_Date = models.DateField(blank = True, null = True)
     Int_p2_Result = models.TextField(blank = True, null = True)
@@ -180,6 +181,7 @@ class Mapping(models.Model):
     MappingFor = models.TextField(null = True)
     CreatedOn = models.DateField(auto_now_add = True, null = True)
     Mappings =  HStoreField(null=True)
+    Mappings_mandate =  HStoreField(null=True)
 
 class Mandates(models.Model):
 
@@ -195,16 +197,16 @@ class Mandates(models.Model):
     Education = models.TextField(null = True)
     MinExpRange = models.IntegerField(null = True)
     MaxExpRange = models.IntegerField(null = True)
-    CTC = models.IntegerField(blank = True)
-    NoticePeriod = models.IntegerField(blank = True)
+    CTC = models.IntegerField(blank = True, null=True)
+    NoticePeriod = models.IntegerField(blank = True, null=True)
     Status = models.TextField(max_length = 1)
     Openings = models.IntegerField(null = True)
     No_Filled = models.IntegerField(null = True)
     HiringMgrContact = models.IntegerField(null = True)
     HiringMgrEmail = models.TextField(null = True)
-    RecruiterAssignedTo = models.ForeignKey('Usr_table', on_delete = models.RESTRICT)
+    #RecruiterAssignedTo = models.ForeignKey('Usr_table', on_delete = models.RESTRICT)
     AssignedDate = models.DateField(null = True)
-    ClientID = models.ForeignKey('Client', on_delete = models.RESTRICT)
+    #ClientID = models.ForeignKey('Client', on_delete = models.RESTRICT)
 
 class Usr_table(models.Model):
     # UserID = models.IntegerField(primary_key = True)
