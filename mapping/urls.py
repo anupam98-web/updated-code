@@ -10,5 +10,6 @@ urlpatterns = [
         path('mandate_fieldmatching', views.mandate_fieldmatching),
         path('mandate_choose', views.mandate_choose),
         path('mandate_import_p', views.mandate_import_data_p),
+        path('datavisual', views.visualization),
 
 ]
