@@ -417,8 +417,8 @@ def fieldmatching(request):
 
         return render(request, 'fieldmatching.html',
                     {'fields': fields, 'path_name': path_name, 'names': names})
-
-
+        
+ 
 def save_dict(dictionary):
     for index, object in dictionary.items():
         m = Staging()
@@ -596,5 +596,174 @@ def mandate_import_data_p(request):
         print(p)
         return render(request, 'mandate-import_data.html')
 
+def visualization(request):
+        cred = 'postgresql://postgres:willoffire@1@localhost:5432/Candidate'
+        sqldata = pd.read_sql("""
+                                SELECT *
+                                FROM rlogdata_staging
+                                """, con = cred)
+        sqldatamandate = pd.read_sql("""
+                                SELECT *
+                                FROM rlogdata_mandates
+                                """, con = cred)
+        #print(sqldata)
 
+        # for selection ration of HR
+        Hr_int = sqldata[sqldata['current_status']==8]
+        print(len(Hr_int.index))
+        Hr_rej = sqldata[sqldata['current_status']==108]
+        #print(Hr_rej)
+        print(len(Hr_rej.index))
+        Selection_Ratio_HR = (len(Hr_int.index)-len(Hr_rej.index))/ len(Hr_int.index)
+        #print("Selection_Ratio_HR: " + str(Selection_Ratio_HR))
+        # end selection ration of HR
+
+        # for selection ratio of Tech
+        F2F_int = Staging.objects.filter(current_status__in = [5, 6]).count()
+        F2F_int_rejects = Staging.objects.filter(current_status__in = [105, 106]).count()
+        #print("this is f2f: " + str(F2F_int) + "This is f2f rejects : " + str(F2F_int_rejects))
+        F2F_selection_ratio = (F2F_int - F2F_int_rejects)/F2F_int
+        #print("Selection Ratio Tech: ", F2F_selection_ratio)
+        # end selection ration of tech
+
+        # for final interview selection ratio
+        Final_int = Staging.objects.filter(current_status = 7).count()
+        Final_int_rejects = Staging.objects.filter(current_status = 107).count()
+        #print("this is f2f: " + str(F2F_int) + "This is f2f rejects : " + str(F2F_int_rejects))
+        Final_selection_ratio = (Final_int - Final_int_rejects)/Final_int
+        #print("Selection Ratio Final: ", Final_selection_ratio)
+        # end selection ratio of final interview
+
+  
+
+        
+        # for checking the resumne submitted in last 7 days
+        today = datetime.date.today()
+        print("today date is: ", today)
+        last14dates = [today + datetime.timedelta(days =i) for i in range(-13 -today.weekday(), 1 - today.weekday())] # this is taking the date from the 1st dec.
+        lastweek = last14dates[:(len(last14dates)//2)]
+        thisweek = last14dates[(len(last14dates)//2):]
+        for i in thisweek:
+            print("thisweek: ", i)
+        #print('thisweek', thisweek)
+        print('')
+        for column in sqldata[['date_cv_submitted']]:
+            columndata = sqldata[column]
+            datalist = columndata.values
+        #print(datalist)
+        countlastweek = 0
+        countthisweek = 0
+        for i in datalist:
+            if i in lastweek: 
+                countlastweek = countlastweek + 1
+            if i in thisweek:
+                countthisweek = countthisweek + 1
+        print('count this week: ',countthisweek)
+        print('count last week: ',countlastweek)
+        increase = ((countthisweek - countlastweek)/countlastweek) * 100
+        print(increase)
+        # 7 days ends
+
+        # for checking the resume submitted in last month
+        last60dates = [today + datetime.timedelta(days =i) for i in range(-61 -today.weekday(), 1 - today.weekday())]
+        print('no. of ',len(last60dates))
+        lastmonth = last60dates[:(len(last60dates)//2)]
+        thismonth = last60dates[(len(last60dates)//2):]
+        print('this month: ', len(thismonth))
+        print('last month: ', len(lastmonth))
+        for i in thismonth:
+            print("thismonth: ", i)
+        #print('thisweek', thisweek)
+        print('')
+        for column in sqldata[['date_cv_submitted']]:
+            columndata = sqldata[column]
+            datalist = columndata.values
+        #print(datalist)
+        countlastmonth = 0
+        countthismonth = 0
+        for i in datalist:
+            if i in lastweek: 
+                countlasttmonth = countlastmonth + 1
+            if i in thisweek:
+                countthismonth = countthismonth + 1
+        print('count this month: ',countthismonth)
+        print('count last month: ',countlastmonth)
+        #increase_month = ((countthismonth - countlastmonth)/countlastmonth) * 100
+        #print(increase_month)
+        # month ends
+
+        
+        
+
+        # turn around time
+        date_difference = sqldata['date_cv_submitted'] - sqldata['reqt_date']
+        y = list(date_difference.dt.days.astype(int))
+        counttill2 = 0
+        counttill5 = 0
+        counttill10 = 0
+        countmore = 0
+        for i in y:
+            if i in range(1,3):
+                counttill2 = counttill2 + 1
+            if i in range(3, 6):
+                counttill5 = counttill5 + 1
+            if i in range(6,11):
+                counttill10 = counttill10 + 1
+            if i in range(11,):
+                countmore = countmore + 1
+                
+        print(date_difference.dtypes)
+        #date_difference.astype(int)
+        #print(y)
+        datecount=0
+        for i in y:
+            datecount = datecount + i
+        #print(datecount)
+        TAT = datecount/len(y)
+        print('average turn around time',TAT)
+        # we have to calculate the no of times i is appearing. 0 to 2, 3 to 5, 6 to 10, 10< above
+
+
+        
+        # turn around time ends
+
+
+        # %_of open position
+        #all_the_positions = Mandates.objects.values_list('Title')
+        positionsinmandates = []
+        all_the_positions = Mandates.objects.values('Title')
+        for i in all_the_positions:
+            for keys,values in i.items():
+                positionsinmandates.append(values)
+        print(positionsinmandates)
+        for i in positionsinmandates:
+            x = Mandates.objects.filter(Title = i)[0].Openings - Mandates.objects.filter(Title = i)[0].No_Filled
+            y = Staging.objects.filter(current_status__in = [1,2,3,4,5,6,7,8,9,10,13,15], position = i).count()
+            #z = (x/y) * 100
+            print(x)
+            print(y)
+            #print(z)
+            print('%_open_position_for: ' + i + '- ')
+        #no_of_position_left_open = list(sqldatamandate['Openings']- sqldatamandate['No_Filled'])
+        # we need to indulge the user and the company. like that one company and 3 position for the same company 
+        #print(no_of_position_left_open)
+        # if no filled == opening
+        # if no filled 
+        
+            
+
+        #sqldatamandate = Mandates.objects.raw('''SELECT * FROM rlogdata_mandates''')
+        #print(sqldatamandate)
+
+        return render(request, 'datavisual.html', {'Selection_ratio': ['Selection_Ratio_HR','Selection Ratio Tech','Selection Ratio Final'],
+                                                   'Selection_ratio_value': [Selection_Ratio_HR, F2F_selection_ratio, Final_selection_ratio],
+                                                   'resume_sublast_sevendays': ['count this week', 'count last week'],
+                                                   'resume_sublast_seven_val': [countthisweek, countlastweek],
+                                                   'resume_sublast_month': ['count this month', 'count last month'],
+                                                   'resume_sublast_month_val': [countthismonth, countlastmonth]
+                                                   }
+                      )
+
+# {% for key in Selection_ratio_dict.items %}'{{key.Selection_ratio_dict}}',{% endfor %}
+# {% for value in Selection_ratio_dict.items %}'{{item.Selection_ratio_dict}}',{% endfor %}
 
