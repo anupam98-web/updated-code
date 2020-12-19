@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block titles %}data visulization{% endblock titles %}
+
+{% block scripts %}
+<script>
+$(document).ready(function(){
+var ctx = document.getElementById('Selection_ratio').getContext('2d');
+var Selection_ratio = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for key in Selection_ratio %} "{{key}}", {% endfor %}],
+        datasets: [{
+            label: 'Selection_ratio',
+            data: [{% for key in Selection_ratio_value %} "{{key}}", {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+});
+</script>
+<script>
+$(document).ready(function(){
+var ctx = document.getElementById('resume_sublast_seven').getContext('2d');
+var resume_sublast_seven = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for key in resume_sublast_sevendays %} "{{key}}", {% endfor %}],
+        datasets: [{
+            label: 'resumelast7days',
+            data: [{% for key in resume_sublast_seven_val %} "{{key}}", {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+});
+</script>
+
+<script>
+$(document).ready(function(){
+var ctx = document.getElementById('resume_sublast_month').getContext('2d');
+var resume_sublast_month = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for key in resume_sublast_month %} "{{key}}", {% endfor %}],
+        datasets: [{
+            label: 'resumelastmonth',
+            data: [{% for key in resume_sublast_month_val %} "{{key}}", {% endfor %}],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+});
+</script>
+
+
+{% endblock scripts %}
+
+
+
+
+{% block content %}
+
+<canvas id="Selection_ratio" width="700" height="150"></canvas>
+<canvas id="resume_sublast_seven" width="700" height="150"></canvas>
+<canvas id="resume_sublast_month" width="700" height="150"></canvas>
+
+{% endblock content %}
