@@ -615,7 +615,7 @@ def visualization(request):
         #print(Hr_rej)
         print(len(Hr_rej.index))
         Selection_Ratio_HR = (len(Hr_int.index)-len(Hr_rej.index))/ len(Hr_int.index)
-        #print("Selection_Ratio_HR: " + str(Selection_Ratio_HR))
+        print("Selection_Ratio_HR: " + str(Selection_Ratio_HR))
         # end selection ration of HR
 
         # for selection ratio of Tech
@@ -623,7 +623,7 @@ def visualization(request):
         F2F_int_rejects = Staging.objects.filter(current_status__in = [105, 106]).count()
         #print("this is f2f: " + str(F2F_int) + "This is f2f rejects : " + str(F2F_int_rejects))
         F2F_selection_ratio = (F2F_int - F2F_int_rejects)/F2F_int
-        #print("Selection Ratio Tech: ", F2F_selection_ratio)
+        print("Selection Ratio Tech: ", F2F_selection_ratio)
         # end selection ration of tech
 
         # for final interview selection ratio
@@ -631,12 +631,14 @@ def visualization(request):
         Final_int_rejects = Staging.objects.filter(current_status = 107).count()
         #print("this is f2f: " + str(F2F_int) + "This is f2f rejects : " + str(F2F_int_rejects))
         Final_selection_ratio = (Final_int - Final_int_rejects)/Final_int
-        #print("Selection Ratio Final: ", Final_selection_ratio)
+        print("Selection Ratio Final: ", Final_selection_ratio)
+
+        # we use bar graph
         # end selection ratio of final interview
 
   
 
-        
+        # we show the specific calculated result
         # for checking the resumne submitted in last 7 days
         today = datetime.date.today()
         print("today date is: ", today)
@@ -710,11 +712,12 @@ def visualization(request):
             if i in range(6,11):
                 counttill10 = counttill10 + 1
             if i in range(11,):
-                countmore = countmore + 1
+                countmorethan10 = countmore + 1
                 
         print(date_difference.dtypes)
         #date_difference.astype(int)
         #print(y)
+        print(str(counttill2)+'  '+str(counttill5)+'   '+str(counttill10) + '   ' + str(countmorethan10))
         datecount=0
         for i in y:
             datecount = datecount + i
@@ -755,12 +758,14 @@ def visualization(request):
         #sqldatamandate = Mandates.objects.raw('''SELECT * FROM rlogdata_mandates''')
         #print(sqldatamandate)
 
-        return render(request, 'datavisual.html', {'Selection_ratio': ['Selection_Ratio_HR','Selection Ratio Tech','Selection Ratio Final'],
+        return render(request, 'visualwithdash.html', {'Selection_ratio': ['Selection_Ratio_HR','Selection Ratio Tech','Selection Ratio Final'],
                                                    'Selection_ratio_value': [Selection_Ratio_HR, F2F_selection_ratio, Final_selection_ratio],
                                                    'resume_sublast_sevendays': ['count this week', 'count last week'],
                                                    'resume_sublast_seven_val': [countthisweek, countlastweek],
                                                    'resume_sublast_month': ['count this month', 'count last month'],
-                                                   'resume_sublast_month_val': [countthismonth, countlastmonth]
+                                                   'resume_sublast_month_val': [countthismonth, countlastmonth],
+                                                   'TAT_categories': ['0-2','3-5','6-10','10 above'],
+                                                   'TAT_categories_value':[counttill2, counttill5, counttill10, countmorethan10]
                                                    }
                       )
 
