@@ -2,6 +2,9 @@ from django.shortcuts import render, redirect
 from dashboard import views
 from mapping import views
 from rlogdata.models import Staging
+from mapping.views import visualization
+from rlogdata.models import *
+import pandas as pd
 
 
 # Create your views here.
@@ -52,7 +55,43 @@ def cards_dash(request):
 
 
 def charts_dash(request):
-    return render(request, 'charts.html')
+    cred = 'postgresql://postgres:willoffire@1@localhost:5432/Candidate'
+    sqldata = pd.read_sql("""
+                                SELECT *
+                                FROM rlogdata_staging
+                                """, con = cred)
+    # turn around time
+    date_difference = sqldata['date_cv_submitted'] - sqldata['reqt_date']
+    y = list(date_difference.dt.days.astype(int))
+    counttill2 = 0
+    counttill5 = 0
+    counttill10 = 0
+    countmore = 0
+    for i in y:
+            if i in range(1,3):
+                counttill2 = counttill2 + 1
+            if i in range(3, 6):
+                counttill5 = counttill5 + 1
+            if i in range(6,11):
+                counttill10 = counttill10 + 1
+            if i in range(11,):
+                countmorethan10 = countmore + 1
+                
+    print(date_difference.dtypes)
+        #date_difference.astype(int)
+        #print(y)
+    print(str(counttill2)+'  '+str(counttill5)+'   '+str(counttill10) + '   ' + str(countmorethan10))
+    datecount=0
+    for i in y:
+            datecount = datecount + i
+    #print(datecount)
+    TAT = datecount/len(y)
+    print('average turn around time',TAT)
+    # we have to calculate the no of times i is appearing. 0 to 2, 3 to 5, 6 to 10, 10< above
+    return render(request, 'charts.html', {'TAT_categories': ['0-2','3-5','6-10','10 above'],
+                                           'TAT_categories_value':[counttill2, counttill5, counttill10, countmorethan10]}
+                  )
+    #visualization(request)
 
 
 def forgot_password(request):
@@ -66,7 +105,7 @@ def register(request):
 def upload(request):
     return redirect('/choose')
 
-def mandate_upload(request): # your edit
+def mandate_upload(request):
     return redirect('/mandate_choose')
 
 
