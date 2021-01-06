@@ -4,23 +4,30 @@
 <html lang="en">
 
 <head>
-  
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
 
-  <title>SB Admin 2 - Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- semantic UI -->
+    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.14/semantic.min.css">
+    <!--Chart js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
-  <!-- Custom fonts for this template-->
-  <link href="{% static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <title>SB Admin 2 - Dashboard</title>
 
-  <!-- Custom styles for this template-->
+    <!-- Custom fonts for this template-->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css'%}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <link rel="stylesheet"  type="text/css" href="{% static 'css/sb-admin-2.min.css'%}">
- 
+    <!-- Custom styles for this template-->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/sb-admin-2.min.css'%}">
+
 </head>
 
 
@@ -40,7 +47,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index_dash.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index_dash">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -52,7 +59,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="index_dash.html">
+        <a class="nav-link" href="/dash">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -131,19 +138,59 @@
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Charts</span></a>
       </li>
-      <!-- Nav Item - Import Excel -->
-      <li class="nav-item">
-        <a class="nav-link" href="choose">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>Import/Mapping</span></a>
-      </li>
-
+      
       <!-- Nav Item - Tables -->
       <li class="nav-item">
         <a class="nav-link" href="tables">
           <i class="fas fa-fw fa-table"></i>
           <span>Tables</span></a>
       </li>
+
+      <!-- Nav Item - Mandates -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseMandates" aria-expanded="true" aria-controls="collapseMandates">
+          <i class="fas fa-fw fa-user"></i>
+          <span>Mandates</span>
+        </a>
+        <div id="collapseMandates" class="collapse" aria-labelledby="headingMandates" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">User Option:</h6>
+            <a class="collapse-item" href="upload_mandate">Upload</a>
+            <a class="collapse-item" href="display_mandate">Display</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - CandidatePipeline -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCandidatePipeline" aria-expanded="true" aria-controls="collapseCandidatePipeline">
+          <i class="fas fa-fw fa-user"></i>
+          <span>CandidatePipeline</span>
+        </a>
+        <div id="collapseCandidatePipeline" class="collapse" aria-labelledby="headingCandidatePipeline" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">User Option:</h6>
+            <a class="collapse-item" href="choose">Upload</a>
+            <a class="collapse-item" href="display_candidate">Display</a>
+          </div>
+        </div>
+      </li>
+
+      
+
+      <li class="nav-item">
+        <a class="nav-link" href="badrecords_dash">
+          <i class="fas fa-fw fa-sticky-note mr-3"></i>
+          <span>Bad Records</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="manageteam_dash">
+          <i class="fas fa-fw fa-cogs mr-3"></i>
+          <span>ManageTeam</span></a>
+      </li>
+
+      
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
@@ -358,12 +405,12 @@
           <div class="row">
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Earnings (Monthly)</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Resume Submitted (Weekly)</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
                     </div>
                     <div class="col-auto">
@@ -375,12 +422,12 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card border-left-success shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Earnings (Annual)</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Reume Submitted (Monthly)</div>
                       <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
                     </div>
                     <div class="col-auto">
@@ -392,12 +439,12 @@
             </div>
 
             <!-- Earnings (Monthly) Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
               <div class="card border-left-info shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks</div>
+                      <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Resume</div>
                       <div class="row no-gutters align-items-center">
                         <div class="col-auto">
                           <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
@@ -418,93 +465,554 @@
             </div>
 
             <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Content Row -->
 
           <div class="row">
+              <!-- Donut Chart -->
+              <div class="col-xl-12 col-lg-auto">
+                  <div class="card shadow mb-4">
+                      <!-- Card Header - Dropdown -->
+                      <div class="card-header py-1">
+                          <h6 class="m-0 font-weight-bold text-primary">Summarized View</h6>
+                      </div>
+                      <!-- Card Body -->
+                      <div style="flex: 1 1 auto; min-height: 1px; padding:0px">
+                          <div class="chart-pie pt-4">
+                              <script>
+                            $(document).ready(function(){
+                            var ctx = document.getElementById('TAT');
+                            var TAT = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in TAT_categories %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in TAT_categories_value %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#1cc88a'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#2e59d9'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
 
-            <!-- Area Chart -->
-            <div class="col-xl-8 col-lg-7">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
+                                    }]
+                                },
+                                options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+                            Chart.pluginService.register({
+                                beforeDraw: function(chart) {
+                                    var width = chart.chart.width,
+                                        height = chart.chart.height,
+                                        ctx = chart.chart.ctx;
+                                    ctx.restore();
+                                    var fontSize = (height / 114).toFixed(2);
+                                    ctx.font = fontSize + "em sans-serif";
+                                    ctx.textBaseline = "middle";
+
+                                    var text = "hehe",
+                                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                        textY = height / 2;
+                                    ctx.fillText(text, textX, textY);
+                                    ctx.save();
+                            }
+                            });
+
+
+
+                            });
+                              </script>
+                              <script>
+                            $(document).ready(function(){
+                            var anupam = document.getElementById('sourcing_Effectiveness');
+                            var sourcing_Effectiveness = new Chart(anupam, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in sourcing_Effectiveness %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in sourcing_Effectiveness_values %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#f6c23e'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+
+                                    }]
+                                },
+                                options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+                            Chart.pluginService.register({
+                                beforeDraw: function(chart) {
+                                    var width = chart.chart.width,
+                                        height = chart.chart.height,
+                                        ctx = chart.chart.ctx;
+                                    ctx.restore();
+                                    var fontSize = (height / 114).toFixed(2);
+                                    ctx.font = fontSize + "em sans-serif";
+                                    ctx.textBaseline = "middle";
+
+                                    var text = "hehehaha",
+                                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                        textY = height / 2;
+                                    ctx.fillText(text, textX, textY);
+                                    ctx.save();
+                            }
+                            });
+
+                            });
+                              </script>
+                              <script>
+                            $(document).ready(function(){
+                            var ctx = document.getElementById('Candidate_quality_index');
+                            var Candidate_quality_index = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in Candidate_quality_index %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in Candidate_quality_index_val %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#1cc88a'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+
+                                    }]
+                                },
+                                options: {
+                                        maintainAspectRatio: false,
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+
+
+                            });
+                              </script>
+                              <script>
+                            $(document).ready(function(){
+                            var ctx = document.getElementById('Candidate_Intimacy');
+                            var Candidate_Intimacy = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in Candidate_Intimacy %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in Candidate_Intimacy_value %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+
+                                    }]
+                                },
+                                options: {
+                                        maintainAspectRatio: false,
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+
+
+                            });
+                              </script>
+                              <div class="row">
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                                      <div class="center-block">
+                                          <p style="text-align:center"> TAT Rating</p>
+                                          <div>
+                                              <div>
+                                                  <canvas id="TAT" height="100"></canvas>
+                                              </div>
+                                          </div>
+                                          <p style="text-align:center">
+                                              0-2<br />
+                                              3-5<br />
+                                              6-10<br />
+                                              10 above<br />
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                                      <div class="center-block">
+                                          <p style="text-align:center"> Sourcing Effectiveness</p>
+                                          <div>
+                                              <div>
+                                                  <canvas id="sourcing_Effectiveness" height="100" width="100"></canvas>
+                                              </div>
+                                          </div>
+                                          <p style="text-align:center">
+                                              CV Rejected<br />
+                                              Duplicate CV<br />
+                                              Interview Reject<br />
+                                              Interview Select<br />
+                                              CV Shortlisted<br />
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                                      <div class="center-block">
+                                          <p style="text-align:center"> Candidate Quality Index</p>
+                                          <div>
+                                              <div>
+                                                  <canvas id="Candidate_quality_index" height="100" width="100"></canvas>
+                                              </div>
+                                          </div>
+                                          <p style="text-align:center">
+                                              Interview Reject<br />
+                                              Interview Select<br />
+                                              Offered<br>
+                                              HR Reject<br />
+                                          </p>
+                                      </div>
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-3">
+                                      <div class="center-block">
+                                          <p style="text-align:center"> Candidate Intimacy</p>
+                                          <div>
+                                              <div>
+                                                  <canvas id="Candidate_Intimacy" height="100" width="100"></canvas>
+                                              </div>
+                                          </div>
+                                          <p style="text-align:center">
+                                              Joined<br />
+                                              Rejected<br>
+                                              Accpeted<br />
+                                              Offered<br />
+                                          </p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <hr>
+
+                      </div>
                   </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-area">
-                    <canvas id="myAreaChart"></canvas>
-                  </div>
-                </div>
+              </div>
+
+         <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Candidate Joined</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                  <tr>
+                    
+                    <th>client</th>
+                    <th>candidate_name</th>
+                    <th>contact_details_mobile</th>
+                    <th>joining_date</th>>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in table %}
+
+                    <tr>
+              
+                    <td>{{item.client}}</td>
+                    <td>{{item.candidate_name}}</td>
+                    <td>{{item.contact_details_mobile}}</td>
+                    <td>{{item.joining_date}}</td>
+
+                  </tr>
+
+
+                  {% endfor %}
+                  </tbody>
+                </table>
               </div>
             </div>
+          </div>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Current Mandates</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                  <tr>
+                    <th>recruiter</th>
+                    <th>client</th>
+                    <th>position</th>
+                    <th>reqt_date</th>
+                    <th>date_cv_submitted</th>
+                    <th>candidate_name</th>
+                    <th>current_status</th>
+                    <th>current_status_desc</th>
+                    <th>interview_date</th>
+                    <th>remarks</th>
+                    <th>skills</th>
+                    <th>current_org</th>
+                    <th>qualification</th>
+                    <th>total_exp</th>
+                    <th>current_location</th>
+                    <th>contact_details_mobile</th>
+                    <th>contact_details_phone2</th>
+                    <th>email</th>
+                    <th>current_salary</th>
+                    <th>expected_salary_percentage</th>
+                    <th>expected_salary_amt</th>
+                    <th>notice_period</th>
+                    <th>Int_Tele_Date</th>
+                    <th>Int_Tele_Result</th>
+                    <th>Int_P1_Date</th>
+                    <th>Int_P1_Result</th>
+                    <th>Int_p2_Date</th>
+                    <th>Int_p2_Result</th>
+                    <th>Int_p3_Date</th>
+                    <th>Int_p3_Result</th>
+                    <th>Int_Final_Date</th>
+                    <th>Int_Final_Result</th>
+                    <th>Int_HR_Date</th>
+                    <th>Int_HR_Result</th>
+                    <th>offer_date</th>
+                    <th>offer_amt</th>
+                    <th>joining_date</th>
+                    <th>vacancy_code</th>
+                    <th>applicant_code</th>
+                    <th>DOB</th>
+                    <th>preferred_company</th>
+                    <th>preferred_location</th>
+                    <th>week_number</th>
+                    <th>wk_year</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in table %}
 
-            <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
-                </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="myPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
-                    </span>
-                  </div>
-                </div>
+                    <tr>
+                    <td>{{item.recruiter}}</td>
+                    <td>{{item.client}}</td>
+                    <td>{{item.position}}</td>
+                    <td>{{item.reqt_date}}</td>
+                    <td>{{item.date_cv_submitted}}</td>
+                    <td>{{item.candidate_name}}</td>
+                    <td>{{item.current_status}}</td>
+                    <td>{{item.current_status_desc}}</td>
+                    <td>{{item.interview_date}}</td>
+                    <td>{{item.remarks}}</td>
+                    <td>{{item.skills}}</td>
+                    <td>{{item.current_org}}</td>
+                    <td>{{item.qualification}}</td>
+                    <td>{{item.total_exp}}</td>
+                    <td>{{item.current_location}}</td>
+                    <td>{{item.contact_details_mobile}}</td>
+                    <td>{{item.contact_details_phone2}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.current_salary}}</td>
+                    <td>{{item.expected_salary_percentage}}</td>
+                    <td>{{item.expected_salary_amt}}</td>
+                    <td>{{item.notice_period}}</td>
+                    <td>{{item.Int_Tele_Date}}</td>
+                    <td>{{item.Int_Tele_Result}}</td>
+                    <td>{{item.Int_P1_Date}}</td>
+                    <td>{{item.Int_P1_Result}}</td>
+                    <td>{{item.Int_p2_Date}}</td>
+                    <td>{{item.Int_p2_Result}}</td>
+                    <td>{{item.Int_p3_Date}}</td>
+                    <td>{{item.Int_p3_Result}}</td>
+                    <td>{{item.Int_Final_Date}}</td>
+                    <td>{{item.Int_Final_Result}}</td>
+                    <td>{{item.Int_HR_Date}}</td>
+                    <td>{{item.Int_HR_Result}}</td>
+                    <td>{{item.offer_date}}</td>
+                    <td>{{item.offer_amt}}</td>
+                    <td>{{item.joining_date}}</td>
+                    <td>{{item.vacancy_code}}</td>
+                    <td>{{item.applicant_code}}</td>
+                    <td>{{item.DOB}}</td>
+                    <td>{{item.preferred_company}}</td>
+                    <td>{{item.preferred_location}}</td>
+                    <td>{{item.week_number}}</td>
+                    <td>{{item.wk_year}}</td>
+                  </tr>
+
+
+                  {% endfor %}
+                  </tbody>
+                </table>
               </div>
             </div>
+          </div>  
+
+            <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Current Activity</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                  <tr>
+                    <th>recruiter</th>
+                    <th>client</th>
+                    <th>position</th>
+                    <th>reqt_date</th>
+                    <th>date_cv_submitted</th>
+                    <th>candidate_name</th>
+                    <th>current_status</th>
+                    <th>current_status_desc</th>
+                    <th>interview_date</th>
+                    <th>remarks</th>
+                    <th>skills</th>
+                    <th>current_org</th>
+                    <th>qualification</th>
+                    <th>total_exp</th>
+                    <th>current_location</th>
+                    <th>contact_details_mobile</th>
+                    <th>contact_details_phone2</th>
+                    <th>email</th>
+                    <th>current_salary</th>
+                    <th>expected_salary_percentage</th>
+                    <th>expected_salary_amt</th>
+                    <th>notice_period</th>
+                    <th>Int_Tele_Date</th>
+                    <th>Int_Tele_Result</th>
+                    <th>Int_P1_Date</th>
+                    <th>Int_P1_Result</th>
+                    <th>Int_p2_Date</th>
+                    <th>Int_p2_Result</th>
+                    <th>Int_p3_Date</th>
+                    <th>Int_p3_Result</th>
+                    <th>Int_Final_Date</th>
+                    <th>Int_Final_Result</th>
+                    <th>Int_HR_Date</th>
+                    <th>Int_HR_Result</th>
+                    <th>offer_date</th>
+                    <th>offer_amt</th>
+                    <th>joining_date</th>
+                    <th>vacancy_code</th>
+                    <th>applicant_code</th>
+                    <th>DOB</th>
+                    <th>preferred_company</th>
+                    <th>preferred_location</th>
+                    <th>week_number</th>
+                    <th>wk_year</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in table %}
+
+                    <tr>
+                    <td>{{item.recruiter}}</td>
+                    <td>{{item.client}}</td>
+                    <td>{{item.position}}</td>
+                    <td>{{item.reqt_date}}</td>
+                    <td>{{item.date_cv_submitted}}</td>
+                    <td>{{item.candidate_name}}</td>
+                    <td>{{item.current_status}}</td>
+                    <td>{{item.current_status_desc}}</td>
+                    <td>{{item.interview_date}}</td>
+                    <td>{{item.remarks}}</td>
+                    <td>{{item.skills}}</td>
+                    <td>{{item.current_org}}</td>
+                    <td>{{item.qualification}}</td>
+                    <td>{{item.total_exp}}</td>
+                    <td>{{item.current_location}}</td>
+                    <td>{{item.contact_details_mobile}}</td>
+                    <td>{{item.contact_details_phone2}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.current_salary}}</td>
+                    <td>{{item.expected_salary_percentage}}</td>
+                    <td>{{item.expected_salary_amt}}</td>
+                    <td>{{item.notice_period}}</td>
+                    <td>{{item.Int_Tele_Date}}</td>
+                    <td>{{item.Int_Tele_Result}}</td>
+                    <td>{{item.Int_P1_Date}}</td>
+                    <td>{{item.Int_P1_Result}}</td>
+                    <td>{{item.Int_p2_Date}}</td>
+                    <td>{{item.Int_p2_Result}}</td>
+                    <td>{{item.Int_p3_Date}}</td>
+                    <td>{{item.Int_p3_Result}}</td>
+                    <td>{{item.Int_Final_Date}}</td>
+                    <td>{{item.Int_Final_Result}}</td>
+                    <td>{{item.Int_HR_Date}}</td>
+                    <td>{{item.Int_HR_Result}}</td>
+                    <td>{{item.offer_date}}</td>
+                    <td>{{item.offer_amt}}</td>
+                    <td>{{item.joining_date}}</td>
+                    <td>{{item.vacancy_code}}</td>
+                    <td>{{item.applicant_code}}</td>
+                    <td>{{item.DOB}}</td>
+                    <td>{{item.preferred_company}}</td>
+                    <td>{{item.preferred_location}}</td>
+                    <td>{{item.week_number}}</td>
+                    <td>{{item.wk_year}}</td>
+                  </tr>
+
+
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+
+
+              <!-- Area Chart -->
+              
+
+              <!-- Pie Chart -->
+             
           </div>
 
           <!-- Content Row -->
