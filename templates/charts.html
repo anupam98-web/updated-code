@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/sb-admin-2.min.css'%}">
 
+
 </head>
 
 <body id="page-top">
@@ -411,38 +412,227 @@
               <!-- Bar Chart -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Selection Ratio</h6>
                 </div>
                 <div class="card-body">
                         <div class="chart-bar">
-                            <canvas id="myBarChart"></canvas>
+                            <script>
+                                $(document).ready(function(){
+                                var ctx = document.getElementById('SR').getContext('2d');
+                                var SR = new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: [{% for key in Selection_ratio %} "{{key}}", {% endfor %}],
+                                        datasets: [{
+                                            label: 'Selection_ratio',
+                                            data: [{% for key in Selection_ratio_value %} "{{key}}", {% endfor %}],
+                                            backgroundColor: "#4e73df",
+                                            hoverBackgroundColor: "#2e59d9",
+                                            borderColor: "#4e73df",
+                                        }]
+                                    },
+                                    options: {
+                                        maintainAspectRatio: false,
+                                        layout: {
+                                            padding: {
+                                            left: 10,
+                                            right: 25,
+                                            top: 25,
+                                            bottom: 0
+                                            }
+                                        },
+                                        scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        }
+                                    }
+                                });
+
+
+                                });
+                            </script>
+                            <canvas id="SR"></canvas>
                     </div>
                   <hr>
-                  Styling for the bar chart can be found in the <code>/js/demo/chart-bar-demo.js</code> file.
+                  This is selection ratio for HR, Tech, Final Inteviews. 
                 </div>
               </div>
 
             </div>
 
             <!-- Donut Chart -->
-            <div class="col-xl-4 col-lg-5">
+            <div class="col-xl-12 col-lg-auto">
               <div class="card shadow mb-4">
                 <!-- Card Header - Dropdown -->
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                <div class="card-header py-1">
+                  <h6 class="m-0 font-weight-bold text-primary">Summarized View</h6>
                 </div>
                 <!-- Card Body -->
-                <div class="card-body">
+                <div style="flex: 1 1 auto; min-height: 1px; padding:0px">
                     <div class="chart-pie pt-4">
                         <script>
                             $(document).ready(function(){
-                            var ctx = document.getElementById('TAT').getContext('2d');
+                            var ctx = document.getElementById('TAT');
                             var TAT = new Chart(ctx, {
                                 type: 'doughnut',
                                 data: {
                                     labels: [{% for key in TAT_categories %} "{{key}}", {% endfor %}],
                                     datasets: [{
                                         data: [{% for key in TAT_categories_value %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#1cc88a'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#2e59d9'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+                                        
+                                    }]
+                                },
+                                options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+                            Chart.pluginService.register({
+                                beforeDraw: function(chart) {
+                                    var width = chart.chart.width,
+                                        height = chart.chart.height,
+                                        ctx = chart.chart.ctx;
+                                    ctx.restore();
+                                    var fontSize = (height / 114).toFixed(2);
+                                    ctx.font = fontSize + "em sans-serif";
+                                    ctx.textBaseline = "middle";
+                                
+                                    var text = "hehe",
+                                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                        textY = height / 2;
+                                    ctx.fillText(text, textX, textY);
+                                    ctx.save();
+                            }
+                            });
+
+
+
+                            });
+                        </script>
+                        <script>
+                            $(document).ready(function(){
+                            var anupam = document.getElementById('sourcing_Effectiveness');
+                            var sourcing_Effectiveness = new Chart(anupam, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in sourcing_Effectiveness %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in sourcing_Effectiveness_values %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf', '#f6c23e'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+
+                                    }]
+                                },
+                                options: {
+                                        responsive: true,
+                                        maintainAspectRatio: false,
+
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+                            Chart.pluginService.register({
+                                beforeDraw: function(chart) {
+                                    var width = chart.chart.width,
+                                        height = chart.chart.height,
+                                        ctx = chart.chart.ctx;
+                                    ctx.restore();
+                                    var fontSize = (height / 114).toFixed(2);
+                                    ctx.font = fontSize + "em sans-serif";
+                                    ctx.textBaseline = "middle";
+                                
+                                    var text = "hehehaha",
+                                        textX = Math.round((width - ctx.measureText(text).width) / 2),
+                                        textY = height / 2;
+                                    ctx.fillText(text, textX, textY);
+                                    ctx.save();
+                            }
+                            });
+
+                            });
+                        </script>
+                        <script>
+                            $(document).ready(function(){
+                            var ctx = document.getElementById('Candidate_quality_index');
+                            var Candidate_quality_index = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in Candidate_quality_index %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in Candidate_quality_index_val %} "{{key}}", {% endfor %}],
+                                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#1cc88a'],
+                                        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                                        hoverBorderColor: "rgba(234, 236, 244, 1)",
+
+                                    }]
+                                },
+                                options: {
+                                        maintainAspectRatio: false,
+                                        tooltips: {
+                                          backgroundColor: "rgb(255,255,255)",
+                                          bodyFontColor: "#858796",
+                                          borderColor: '#dddfeb',
+                                          borderWidth: 1,
+                                          xPadding: 15,
+                                          yPadding: 15,
+                                          displayColors: false,
+                                          caretPadding: 10,
+                                        },
+                                        legend: {
+                                          display: false
+                                        },
+                                        cutoutPercentage: 80,
+                                      },
+
+                            });
+
+
+                            });
+                        </script>
+                        <script>
+                            $(document).ready(function(){
+                            var ctx = document.getElementById('Candidate_Intimacy');
+                            var Candidate_Intimacy = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: [{% for key in Candidate_Intimacy %} "{{key}}", {% endfor %}],
+                                    datasets: [{
+                                        data: [{% for key in Candidate_Intimacy_value %} "{{key}}", {% endfor %}],
                                         backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
                                         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                                         hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -472,10 +662,74 @@
 
                             });
                         </script>
-                        <canvas id="TAT"></canvas>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="center-block">
+                                    <p style="text-align:center"> TAT Rating</p>
+                                    <div>
+                                        <div>
+                                            <canvas id="TAT" height="100"></canvas>
+                                        </div>
+                                    </div>
+                                    <p style="text-align:center">
+                                       0-2<br />
+                                       3-5<br />
+                                       6-10<br />
+                                       10 above<br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="center-block">
+                                    <p style="text-align:center"> Sourcing Effectiveness</p>
+                                    <div>
+                                        <div>
+                                            <canvas id="sourcing_Effectiveness" height="100" width="100"></canvas>
+                                        </div>
+                                    </div>
+                                    <p style="text-align:center">
+                                        CV Rejected<br />
+                                        Duplicate CV<br />
+                                        Interview Reject<br />
+                                        Interview Select<br />
+                                        CV Shortlisted<br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="center-block">
+                                    <p style="text-align:center"> Candidate Quality Index</p>
+                                    <div>
+                                        <div>
+                                            <canvas id="Candidate_quality_index" height="100" width="100"></canvas>
+                                        </div>
+                                    </div>
+                                    <p style="text-align:center"> Interview Reject<br />
+                                     Interview Select<br />
+                                    Offered<br>
+                                    HR Reject<br />
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="center-block">
+                                    <p style="text-align:center"> Candidate Intimacy</p>
+                                    <div>
+                                        <div>
+                                            <canvas id="Candidate_Intimacy" height="100" width="100"></canvas>
+                                        </div>
+                                    </div>
+                                    <p style="text-align:center"> Joined<br />
+                                    Rejected<br>
+                                    Accpeted<br />
+                                    Offered<br />
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                   <hr>
-                  Styling for the donut chart can be found in the <code>/js/demo/chart-pie-demo.js</code> file.
+                 
                 </div>
               </div>
             </div>
